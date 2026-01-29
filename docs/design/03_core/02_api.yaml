@@ -1,0 +1,92 @@
+openapi: 3.0.0
+info:
+  title: Agri-OS Core API
+  version: 1.0.0
+  description: 核心业务接口定义，供 Android 端和 AI 端调用。
+
+paths:
+  # ============================
+  # 地块管理 (Plot Management)
+  # ============================
+  /api/v1/plots:
+    get:
+      summary: 获取地块列表
+      parameters:
+        - name: owner
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlotDTO'
+    post:
+      summary: 创建新地块
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlotDTO'
+      responses:
+        '201':
+          description: 创建成功
+
+  # ============================
+  # 任务管理 (Mission Control)
+  # ============================
+  /api/v1/missions:
+    post:
+      summary: 下发新任务 (Android -> Java)
+      description: 此时只是创建记录，并通过 MQTT 通知无人机。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MissionCreateDTO'
+      responses:
+        '200':
+          description: 任务已创建且下发
+
+  /api/v1/missions/{id}/telemetry:
+    get:
+      summary: 获取任务的遥测/轨迹历史 (用于回放)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 返回轨迹点数组
+
+components:
+  schemas:
+    PlotDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        boundary:
+          type: object
+          description: GeoJSON 多边形
+        areaMu:
+          type: number
+    
+    MissionCreateDTO:
+      type: object
+      properties:
+        plotId:
+          type: integer
+        type:
+          type: string
+          enum: [INSPECT, SPRAY]
+        parameters:
+          type: object
