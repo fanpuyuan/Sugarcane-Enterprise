@@ -1,0 +1,47 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+tmp/
+temp/
+.idea/
+.vscode/
+
+# Java / Maven (sugarcane-core)
+target/
+*.class
+*.jar
+*.war
+.mvn/
+
+# Python (sugarcane-brain / sugarcane-pi)
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+.venv
+*.egg-info/
+
+# Android / Gradle (sugarcane-mobile)
+.gradle/
+build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Unreal Engine (sugarcane-twin)
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.xcodeproj
+
+# Docker
+docker-compose.override.yml

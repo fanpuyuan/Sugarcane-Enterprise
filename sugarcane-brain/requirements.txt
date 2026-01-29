@@ -1,0 +1,24 @@
+# Computer Vision
+ultralytics==8.1.0        # YOLOv8
+opencv-python-headless    # Image processing
+
+# Data Analysis & GIS
+scikit-learn              # Clustering
+scikit-image              # Skeletonization
+sentinelsat               # Satellite data download
+rasterio                  # Raster data
+geopandas                 # Vector data
+shapely                   # Geometry
+
+# Graph / Path Planning
+networkx                  # Graph algorithms
+
+# AI / LLM
+langchain-community       # RAG
+ollama                    # Local LLM client
+chromadb                  # Vector DB client
+
+# Infrastructure / Utils
+redis                     # Message Queue
+psycopg2-binary           # Postgres adapter
+requests                  # HTTP client
